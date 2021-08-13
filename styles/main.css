@@ -1,0 +1,109 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+html{
+    background-color: rgba(211, 211, 211, 0.24);
+    display: flex;
+    justify-content: center;
+}
+
+body{
+    width: 100%;
+    max-width: 600px;
+    height: 100vh;
+    border-radius: 10px;
+    background-color: white;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding: 0.5rem;
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-flow: column;
+    justify-content: space-between;
+}
+
+#menuTools{
+    height: 80px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: repeat(2,1fr);
+    justify-items: center;
+    align-items: center;
+    grid-gap: 5px;
+}
+
+#inputCell{
+    grid-column: 1/3;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.btn {
+    display: inline-block;
+    width: 50px;
+    height: 80%;
+    text-align: center;
+    font-weight: bold;
+}
+
+.inactive,.offmode{
+    background-color: transparent;
+    border-radius: 5px;
+    border: 2px solid gray;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    line-height: 40px;
+    cursor: pointer;
+}
+
+.offmode{
+    font-weight: bold;
+    color: white;
+}
+
+.offmode:active{
+    border: none;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.inactive:active, .active{
+    background: #6db3f2; /* Old browsers */
+    background: -moz-linear-gradient(top, #6db3f2 0%, #54a3ee 50%, #3690f0 51%, #1e69de 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #6db3f2 0%,#54a3ee 50%,#3690f0 51%,#1e69de 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #6db3f2 0%,#54a3ee 50%,#3690f0 51%,#1e69de 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6db3f2', endColorstr='#1e69de',GradientType=0 ); /* IE6-9 */    
+    border: none;
+    box-shadow:  0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    font-weight: bold;
+    color: white;
+}
+
+.circle{
+    border-radius: 50%;
+}
+
+main{
+    height: 500px;
+    max-width: 100%;
+    border: 1px solid black;
+    display: grid;
+    
+}
+
+main div{
+    border: 1px solid black;
+    height: 100%;
+    width: 100%;
+    background-color: blue;
+}
+
+main div:hover{
+    background-color: rgb(231, 230, 230);
+}
