@@ -1,40 +1,50 @@
 // Variables
+const labelGridSize = document.querySelector('#label_gridSize');
+const inputGridSize = document.querySelector('#inputGridSize');
+
+const clearAllBtn = document.querySelector('#clearAll');
+
+const labelColorBtn = document.querySelector('#label_color');
+const inputColor = document.querySelector('#colorTool');
+
+const eraserBtn = document.querySelector('#eraser');
+const rainbowBtn = document.querySelector('#rainbow');
+
 const mainTag = document.querySelector('main');
-const go = document.querySelector('#go');
-const chooseColorButton = document.getElementById("chooseColor");
-const colorPickTool = document.getElementById('color');
-const eraser = document.getElementById('eraser');
-const rainbow = document.getElementById('rainbow');
-const divs = document.querySelectorAll('div.block');
-const clearAllButton = document.querySelector('#clearGrid');
 
 
-window.addEventListener('load', firstLoadFunc);
-go.addEventListener('click', createGrid);
-chooseColorButton.addEventListener('click', changeTheColor);
+// Code
+window.addEventListener('load', generateGrid);
+inputGridSize.addEventListener('change', generateGrid);
+window.addEventListener('click', runningstatus);
+
+clearAllBtn.addEventListener('click', activeClearButton);
 
 
-// Supporting Functions
-function createGrid(){
-    const gridSize = document.getElementById("gridSize").value;
 
-    if (gridSize >= 1 && gridSize <= 100)
+// Function 
+function generateGrid() {
+    let size = inputGridSize.value;
+    size = Number(size);
+    if(size >= 1 && size <= 100)
     {
-        while(mainTag.firstChild){
-            mainTag.removeChild(mainTag.firstChild)
+        while(mainTag.firstChild)
+        {
+            mainTag.removeChild(mainTag.firstChild);
         }
 
         mainTag.style.cssText = `
-        grid-template-columns: repeat(${gridSize}, 1fr);
-        grid-template-rows: repeat(${gridSize}, 1fr);
+        grid-template-columns: repeat(${size},1fr);
+        grid-template-rows: repeat(${size},1fr);
         `
 
-        for (let i = 0; i < gridSize; i++)
+
+        for (let i = 0; i < size; i++)
         {
-            for (let j = 0; j < gridSize; j++)
+            for (let j = 0; j < size; j++)
             {
                 const div = document.createElement('div');
-                div.classList.add('block');
+                div.classList.add('lol');
                 mainTag.appendChild(div);
             }
         }
@@ -42,37 +52,104 @@ function createGrid(){
     }
     else
     {
-        alert("Please enter a valid range to make grid from 1 to 100");
+        alert(`Please enter a Number between 1 to 100 only`);
+        inputGridSize.value = 16;
     }
 }
 
 
-function changeTheColor(){
-    chooseColorButton.style.color = "white";
-    chooseColorButton.style.backgroundColor = colorPickTool.value;
-    colorPickTool.addEventListener('change', () => {
-        chooseColorButton.style.backgroundColor = colorPickTool.value;
-    });
+function rainbowColor() {
+    let r = Math.round(Math.random() * 256);
+    let g = Math.round(Math.random() * 256);
+    let b = Math.round(Math.random() * 256);
+
+    let rgb = `rgb(${r},${g},${b})`
+    return rgb;
 }
 
-// This function removes background from buttons
-function rmbg(){
-    chooseColorButton.style.backgroundColor = "transparent";
-    chooseColorButton.style.color = "black";
-    eraser.style.backgroundColor = "transparent";
-    rainbow.style.backgroundColor = "transparent";
+function disableBtn(){
+    labelColorBtn.style.backgroundColor = "transparent";
+    labelColorBtn.style.color = "black";
+    labelColorBtn.style.fontWeight = "normal";
+
+    eraserBtn.style.backgroundColor = "lightgray";
+    labelColorBtn.style.fontWeight = "normal";
+
+    rainbowBtn.style.backgroundColor = "transparent";
+    rainbowBtn.style.color = "black";
+    rainbowBtn.classList.remove('rainbow');
 }
 
-// this function runs when page loads
-function firstLoadFunc(){
-    rmbg();
-    createGrid();
-    changeTheColor();
+
+
+function selectedColor(){
+        disableBtn();
+        inputColor.addEventListener('change', () => {
+            labelColorBtn.style.backgroundColor = inputColor.value;
+            labelColorBtn.style.color = "white";
+            labelColorBtn.style.fontWeight = "bold";
+        });
+        const divs = document.querySelectorAll('.lol');
+        divs.forEach((div) => {
+            div.addEventListener('click', () => {
+                div.style.backgroundColor = inputColor.value;
+            });
+        });
 }
 
 
-clearAllButton.addEventListener("click",() =>{
+function activeEraserBtn(){
+    disableBtn();
+
+    eraserBtn.style.backgroundColor = "white";
+    labelColorBtn.style.fontWeight = "bold";
+
+    const divs = document.querySelectorAll('.lol');
     divs.forEach((div) => {
-        div.style.backgroundColor = "white"
+        div.addEventListener('click', () => {
+            div.style.backgroundColor = "transparent";
+        });
     });
-});
+}
+
+
+function activeRainbowBtn() {
+    disableBtn();
+    rainbowBtn.classList.add('rainbow');
+    const divs = document.querySelectorAll('.lol');
+    divs.forEach((div) => {
+        div.addEventListener('click', () => {
+            div.style.backgroundColor = rainbowColor();
+        });
+    });
+}
+
+
+function activeClearButton() {
+    disableBtn();
+    const divs = document.querySelectorAll('.lol');
+    divs.forEach((div) => {
+        div.style.backgroundColor = "transparent";
+    });
+}
+
+function runningstatus(e) {
+    const uid = e.target.id;
+
+    switch (uid) {
+        case "label_color":
+        case "colorTool" :
+            selectedColor();
+            break;
+        
+        case "eraser" :
+            activeEraserBtn();
+            break;
+        
+        case "rainbow" :
+            activeRainbowBtn();
+            break;
+    }
+
+
+}

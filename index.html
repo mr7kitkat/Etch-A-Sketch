@@ -12,26 +12,26 @@
     <script src="scripts/main.js" defer></script>
 </head>
 <body>
-    <div id="menuTools">
-        <label for="gridSize" id="inputCell" >
-            Create Grid : 
-            <input type="number" name="gridSize" id="gridSize" min="1" max="100" class="btn" value="16">
-            <div id="go" class="inactive circle" style="width: 50px;">Go</div>
-        </label>
-
-        <div id="clearGrid" class="inactive">Clear Grid</div>
-        
-        <label for="color" class="offmode" id="chooseColor">
-            Select Color
-            <input type="color" name="color" id="color" value="#000000" hidden>
+    <header>
+        <label for="gridSize" id="label_gridSize">
+            Create Grid: 
+            <input type="number" name="gridSize" id="inputGridSize" value="16" min="1" max="100">
         </label>
         
-        <div id="eraser" class="inactive">Eraser</div>
-        <div id="rainbow" class="inactive">Rainbow</div>
-    </div>
-
+        <div id="clearAll">Clear All</div>
+    </header>
     <main>
-
+        
     </main>
+    <footer>
+        <label for="colorTool" id="label_color">
+            Select Color
+            <input type="color" name="color" id="colorTool" hidden>
+        </label>
+
+        <div id="eraser">Eraser</div>
+
+        <div id="rainbow">Rainbow</div>
+    </footer>
 </body>
 </html>
