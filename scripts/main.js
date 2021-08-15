@@ -16,7 +16,10 @@ const mainTag = document.querySelector('main');
 // Code
 window.addEventListener('load', generateGrid);
 inputGridSize.addEventListener('change', generateGrid);
-window.addEventListener('click', runningstatus);
+
+labelColorBtn.addEventListener('click', selectedColor);
+eraserBtn.addEventListener('click', activeEraserBtn);
+rainbowBtn.addEventListener('click', activeRainbowBtn);
 
 clearAllBtn.addEventListener('click', activeClearButton);
 
@@ -55,6 +58,7 @@ function generateGrid() {
         alert(`Please enter a Number between 1 to 100 only`);
         inputGridSize.value = 16;
     }
+    
 }
 
 
@@ -73,7 +77,6 @@ function disableBtn(){
     labelColorBtn.style.fontWeight = "normal";
 
     eraserBtn.style.backgroundColor = "lightgray";
-    labelColorBtn.style.fontWeight = "normal";
 
     rainbowBtn.style.backgroundColor = "transparent";
     rainbowBtn.style.color = "black";
@@ -87,11 +90,10 @@ function selectedColor(){
         inputColor.addEventListener('change', () => {
             labelColorBtn.style.backgroundColor = inputColor.value;
             labelColorBtn.style.color = "white";
-            labelColorBtn.style.fontWeight = "bold";
         });
         const divs = document.querySelectorAll('.lol');
         divs.forEach((div) => {
-            div.addEventListener('click', () => {
+            div.addEventListener('click' || 'touchstart' || 'touchmove', () => {
                 div.style.backgroundColor = inputColor.value;
             });
         });
@@ -102,11 +104,10 @@ function activeEraserBtn(){
     disableBtn();
 
     eraserBtn.style.backgroundColor = "white";
-    labelColorBtn.style.fontWeight = "bold";
 
     const divs = document.querySelectorAll('.lol');
     divs.forEach((div) => {
-        div.addEventListener('click', () => {
+        div.addEventListener('click' || 'touchstart' || 'touchmove', () => {
             div.style.backgroundColor = "transparent";
         });
     });
@@ -118,7 +119,7 @@ function activeRainbowBtn() {
     rainbowBtn.classList.add('rainbow');
     const divs = document.querySelectorAll('.lol');
     divs.forEach((div) => {
-        div.addEventListener('click', () => {
+        div.addEventListener('click' || 'touchstart' || 'touchmove', () => {
             div.style.backgroundColor = rainbowColor();
         });
     });
@@ -131,25 +132,4 @@ function activeClearButton() {
     divs.forEach((div) => {
         div.style.backgroundColor = "transparent";
     });
-}
-
-function runningstatus(e) {
-    const uid = e.target.id;
-
-    switch (uid) {
-        case "label_color":
-        case "colorTool" :
-            selectedColor();
-            break;
-        
-        case "eraser" :
-            activeEraserBtn();
-            break;
-        
-        case "rainbow" :
-            activeRainbowBtn();
-            break;
-    }
-
-
 }

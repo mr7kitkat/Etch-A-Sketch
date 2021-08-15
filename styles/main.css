@@ -82,5 +82,4 @@ main .lol:hover{
     background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet); /* For Firefox 3.6 to 15 */
     background: linear-gradient(to bottom, orange , yellow, green, cyan, blue, violet); /* Standard syntax (must be last) */
     font-weight: bolder;
-    color: white;
 }
